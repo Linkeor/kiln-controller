@@ -12,4 +12,20 @@ Sensor Temp|Temp. Capteur
 Target Temp|Temp. cible
 Heat Rate|Pente
 Cost|Coût
+Status|Status
+Simulate|Simuler
 Start|Démarrer
+Stop|Arrêter
+Schedule Name|Nom du programme
+Save|Enregistrer
+Selected Profile|Profil sélectionné
+Estimated Runtime|Temps estimé de la cuisson
+Estimated Power consumption|Estimation de la consommation électrique
+No, take me back|Non, retour
+Yes, start the Run|Oui, lancer la cuisson
+Delete this profile?|Supprimer ce profil ?
+Do your really want to delete this profile?|Etes vous certain de vouloir supprimer ce profil ?
+Yes, delete the profile|Oui, supprimer le profil
+Overwrite this profile?|Remplacer ce profil
+Do your really want to overwrite this profile?|Etes vous certain de vouloir remplacer ce profil ?
+Yes, delete the profile|Oui, supprimer ce profil

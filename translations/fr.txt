@@ -1,0 +1,15 @@
+#language français
+Starting kiln controller|Démarrage de kiln controller
+this is a simulation|ceci est une simulation
+this is a real kiln|fonctionnement avec le four réel
+automatic restart not possible. state file does not exist or is too old.|redémarrage automatique impossible. Le fichier d'état n'existe pas ou est trop vieux.
+Software SPI selected for reading thermocouple|Sélection du SPI logiciel pour la lecture du thermocouple
+Hardware SPI selected for reading thermocouple|Sélection du SPI matériel pour la lecture du thermocouple
+listening on %s:%d|écoute sur %s:%d
+
+#Web GUI
+Sensor Temp|Temp. Capteur
+Target Temp|Temp. cible
+Heat Rate|Pente
+Cost|Coût
+Start|Démarrer

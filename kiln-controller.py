@@ -17,13 +17,17 @@ from geventwebsocket import WebSocketError
 # try/except removed here on purpose so folks can see why things break
 import config
 
-logging.basicConfig(level=config.log_level, format=config.log_format)
-log = logging.getLogger("kiln-controller")
-log.info("Starting kiln controller")
-
 script_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, script_dir + '/lib/')
 profile_path = config.kiln_profiles_directory
+
+# import translation
+from translate import translate, load_translations
+load_translations(config.language)
+
+logging.basicConfig(level=config.log_level, format=config.log_format)
+log = logging.getLogger("kiln-controller")
+log.info(translate("Starting kiln controller"))
 
 from oven import SimulatedOven, RealOven, Profile
 from ovenWatcher import OvenWatcher
@@ -31,22 +35,27 @@ from ovenWatcher import OvenWatcher
 app = bottle.Bottle()
 
 if config.simulate == True:
-    log.info("this is a simulation")
+    log.info(translate("this is a simulation"))
     oven = SimulatedOven()
 else:
-    log.info("this is a real kiln")
+    log.info(translate("this is a real kiln"))
     oven = RealOven()
 ovenWatcher = OvenWatcher(oven)
 # this ovenwatcher is used in the oven class for restarts
 oven.set_ovenwatcher(ovenWatcher)
 
+@app.hook('before_request')
+def before_request():
+    load_translations(config.language)  # Load translation before each request
+    
 @app.route('/')
 def index():
-    return bottle.redirect('/picoreflow/index.html')
+    #return bottle.redirect('/picoreflow/index.html')
+    return bottle.template('index', translate=translate)
 
 @app.get('/api/stats')
 def handle_api():
-    log.info("/api/stats command received")
+    log.info(translate("/api/stats command received"))
     if hasattr(oven,'pid'):
         if hasattr(oven.pid,'pidstats'):
             return json.dumps(oven.pid.pidstats)
@@ -54,7 +63,7 @@ def handle_api():
 
 @app.post('/api')
 def handle_api():
-    log.info("/api is alive")
+    log.info(translate("/api is alive"))
 
 
     # run a kiln schedule
@@ -117,6 +126,10 @@ def find_profile(wanted):
             return profile
     return None
 
+@app.route('/static/<filepath:path>')
+def serve_static(filepath):
+    return bottle.static_file(filepath, root=os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])), "public"))
+    
 @app.route('/picoreflow/:filename#.*#')
 def send_static(filename):
     log.debug("serving %s" % filename)

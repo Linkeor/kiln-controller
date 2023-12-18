@@ -14,6 +14,12 @@ log_format = '%(asctime)s %(levelname)s %(name)s: %(message)s'
 ### Server
 listening_port = 8081
 
+### Language interface and logging
+# use fr.txt or any other file you can create
+# its not necessary to complete the en.txt file as all prompt are allready in english
+# but you can if you want other prompt.
+language= 'fr'
+
 ########################################################################
 # Cost Information
 #
